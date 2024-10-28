@@ -2,7 +2,86 @@
 Start test 1[0m
 Server started!
 Client started!
-Sent: Give me a record # 12
- Received: Give me a record # 12
-Sent: A record # 12 was sent!
-"Received: A record # 12 was sent!
+Sent: exit
+Received: exit
+[1;31m
+Start test 2[0m
+Server started!
+Client started!
+Sent: get 1
+Received: get 1
+Sent: ERROR
+Received: ERROR
+Client started!
+Sent: set 1 Hello world!
+Received: set 1 Hello world!
+	Sent: OK
+Received: OK
+Client started!
+Sent: set 1 HelloWorld!
+Received: set 1 HelloWorld!
+	Sent: OK
+Received: OK
+Client started!
+Sent: get 1
+Received: get 1
+Sent: HelloWorld!
+Received: HelloWorld!
+Client started!
+Sent: delete 1
+Received: delete 1
+	Sent: OK
+Received: OK
+Client started!
+Sent: delete 1
+Received: delete 1
+	Sent: OK
+Received: OK
+Client started!
+Sent: get 1
+Received: get 1
+Sent: ERROR
+Received: ERROR
+Client started!
+%Sent: set 55 Hyperskill is the best!
+)Received: set 55 Hyperskill is the best!
+	Sent: OK
+Received: OK
+Client started!
+Sent: get 55
+Received: get 55
+Sent: Hyperskill is the best!
+"Received: Hyperskill is the best!
+Client started!
+Sent: get 56
+Received: get 56
+Sent: ERROR
+Received: ERROR
+Client started!
+Sent: delete 55
+Received: delete 55
+	Sent: OK
+Received: OK
+Client started!
+Sent: delete 56
+Received: delete 56
+	Sent: OK
+Received: OK
+Client started!
+Sent: delete 100
+Received: delete 100
+	Sent: OK
+Received: OK
+Client started!
+Sent: delete 0
+Received: delete 0
+Sent: ERROR
+Received: ERROR
+Client started!
+Sent: delete 1001
+Received: delete 1001
+Sent: ERROR
+Received: ERROR
+Client started!
+Sent: exit
+Received: exit
