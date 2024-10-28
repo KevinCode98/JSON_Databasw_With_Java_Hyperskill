@@ -1,78 +1,54 @@
 package server;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    private static final int DATABASE_SIZE = 1000;
-    private static String[] database = new String[DATABASE_SIZE];
-
     public static void main(String[] args) {
+        // Set server address and port
+        String address = "127.0.0.1";
+        int port = 23456;
 
-        Scanner scanner = new Scanner(System.in);
-        String command;
-
-        do {
-            command = scanner.nextLine();
-            processComand(command);
-        } while (!command.equals("exit"));
-    }
-
-    private static void processComand(String command) {
-        String[] tokens = command.split(" ");
-
-        if (tokens.length < 2) {
-            System.out.println("Invalid command");
-            return;
-        }
-
-        String action = tokens[0];
-        int index;
         try {
-            index = Integer.parseInt(tokens[1]);
-        } catch (NumberFormatException exception) {
-            System.out.println("Index is not a valid number");
-            return;
-        }
+            // Create a server socket
+            ServerSocket serverSocket = new ServerSocket(port, 50, InetAddress.getByName(address));
+            System.out.println("Server started!");
 
-        switch (action) {
-            case "set":
-                if (index < 1 || index > DATABASE_SIZE) {
-                    System.out.println("ERROR");
-                } else {
-                    set(index, command.substring(tokens[0].length() + tokens[1].length() + 2));
-                    System.out.println("OK");
-                }
-                break;
-            case "get":
-                if (index < 1 || index > DATABASE_SIZE || database[index - 1] == null || database[index - 1].isEmpty()) {
-                    System.out.println("ERROR");
-                } else {
-                    System.out.println(database[index - 1]);
-                }
-                break;
+            // Wait for a client to connect
+            Socket socket = serverSocket.accept();
 
-            case "delete":
-                if (index < 1 || index > DATABASE_SIZE) {
-                    System.out.println("ERROR");
-                } else {
-                    delete(index);
-                    //System.out.println("OK");
-                }
-                break;
-        }
-    }
+            // Create input and output streams
+            DataInputStream input = new DataInputStream(socket.getInputStream());
+            DataOutputStream output = new DataOutputStream(socket.getOutputStream());
 
-    private static void set(int index, String value) {
-        database[index - 1] = value;
-    }
+            // Receive message from the client
+            String receivedMessage = input.readUTF();
+            System.out.println("Received: " + receivedMessage);
 
-    private static void delete(int index) {
-        if (index < 1 || index > DATABASE_SIZE) {
-            System.out.println("ERROR");
-        } else {
-            database[index - 1] = "";
-            System.out.println("OK");
+            // Process the message (assuming the message is in the format "Give me a record # N")
+            // Extract the record number N from the message
+            int recordNumber = Integer.parseInt(receivedMessage.replaceAll("\\D+", ""));
+
+            // Send a response to the client
+            String response = "A record # " + recordNumber + " was sent!";
+            output.writeUTF(response);
+            System.out.println("Sent: " + response);
+
+
+            // Close the connections
+            input.close();
+            output.close();
+            socket.close();
+            serverSocket.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
