@@ -1,78 +1,79 @@
 package server;
 
-import com.google.gson.Gson;
-import server.cli.CommandExecutor;
-import server.cli.commands.DeleteCommand;
-import server.cli.commands.GetCommand;
-import server.cli.commands.SetCommand;
-import server.cli.requests.Request;
-import server.cli.requests.Response;
-import server.exceptions.NoSuchRequestException;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This class implements the server for handling client requests.
+ * */
 
 public class Main {
+    private static Database database;
+    private static final List<ClientHandler> clients = new ArrayList<>();
 
-    private static final String ADDRESS = "127.0.0.1";
-    private static final int PORT = 8000;
+    public static void main(String[] args) throws IOException, InterruptedException {
+        String dbFilePath = System.getProperty("user.dir") + "/src/server/data/db.json";
+        database = new Database(dbFilePath);
 
-    public static void main(String[] args) throws IOException {
-
-        //Design pattern here!
-        final CommandExecutor executor = new CommandExecutor();
-
-        ServerSocket server = new ServerSocket(PORT, 50, InetAddress.getByName(ADDRESS));
+        int port = 1024;
+        ServerSocket server = new ServerSocket(port, 50, InetAddress.getByName("127.0.0.1"));
         System.out.println("Server started!");
 
-        while(true){
-            try(Socket socket = server.accept();
-                DataInputStream input = new DataInputStream(socket.getInputStream());
-                DataOutputStream output = new DataOutputStream(socket.getOutputStream()))
-            {
-                Request request =  new Gson().fromJson(input.readUTF(), Request.class);
-                Response response = new Response();
+        while (true) {
+            Socket socket = server.accept();
+            ClientHandler clientHandler = new ClientHandler(socket, server);
+            clients.add(clientHandler);
 
-                try {
-                    switch (request.getType()) {
-                        case "get":
-                            GetCommand getCmd = new GetCommand(request.getKey());
-                            executor.executeCommand(getCmd);
-                            response.setValue(getCmd.getResult());
-                            break;
-                        case "set":
-                            SetCommand setCmd = new SetCommand(request.getKey(), request.getValue());
-                            executor.executeCommand(setCmd);
-                            break;
-                        case "delete":
-                            DeleteCommand deleteCmd = new DeleteCommand(request.getKey());
-                            executor.executeCommand(deleteCmd);
-                            break;
-                        case "exit":
-                            response.setResponse(Response.STATUS_OK);
-                            output.writeUTF(response.toJSON());
-                            socket.close();
-                            return;
-                        default:
-                            throw new NoSuchRequestException();
-                    }
-                    response.setResponse(Response.STATUS_OK);
+            clientHandler.start();
 
-                } catch (Exception e) {
-                    response.setResponse(Response.STATUS_ERROR);
-                    response.setReason(e.getMessage());
+            if(server.isClosed()) {
+                for(ClientHandler client : clients) {
+                    client.join();
                 }
-
-                output.writeUTF(response.toJSON());
-
+                break;
             }
+        }
+    }
 
-            catch (Exception e) {
-                e.printStackTrace();
+    /**
+     * This class is responsible for handling client connections.
+     * Each instance of ClientHandler manages a single client connection.
+     * */
+    private static class ClientHandler extends Thread {
+        private final Socket socket;
+        private final ServerSocket server;
+
+        private ClientHandler(Socket socket, ServerSocket server) {
+            this.socket = socket;
+            this.server = server;
+        }
+
+        public void run() {
+            try {
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+
+                String received = in.readUTF();
+                System.out.println("Received: " + received);
+
+                String sent = database.executeCommand(received);
+                out.writeUTF(sent);
+                System.out.println("Sent: " + sent);
+
+                if (received.contains("\"type\":\"exit\"")) {
+                    in.close();
+                    out.close();
+                    socket.close();
+                    server.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }

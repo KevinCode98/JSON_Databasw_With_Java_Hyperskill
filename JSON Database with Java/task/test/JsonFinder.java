@@ -17,7 +17,7 @@ public class JsonFinder {
         }
 
         throw new WrongAnswer("Can't find request JSON object in the output.\n" +
-                "It should contain 'type' key");
+            "It should contain 'type' key");
     }
 
     public static String findResponseJsonObject(String output) {
@@ -31,6 +31,6 @@ public class JsonFinder {
         }
 
         throw new WrongAnswer("Can't find request JSON object in the output.\n" +
-                "It should contain 'response' key");
+            "It should contain 'response' key");
     }
 }

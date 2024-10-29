@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">2.606s</div>
+<div class="counter">2.731s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,7 @@
 </thead>
 <tr>
 <td class="success">start</td>
-<td class="success">2.606s</td>
+<td class="success">2.731s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -90,43 +90,121 @@
 <pre>?[1;31m
 Start test 1?[0m
 Server started!
-Client Started
-Sent: {&quot;type&quot;:&quot;exit&quot;} 
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;exit&quot;}
+Received: {&quot;type&quot;:&quot;exit&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;}
 ?[1;31m
 Start test 2?[0m
+?[1;31m
+Start test 3?[0m
 Server started!
-Client Started
-Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;1&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;1&quot;,&quot;value&quot;:&quot;Hello world!&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;1&quot;,&quot;value&quot;:&quot;HelloWorld!&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;1&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;1&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;1&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;1&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;text&quot;,&quot;value&quot;:&quot;Hyperskill is the best!&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;text&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;name&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;name&quot;,&quot;value&quot;:&quot;Sorabh Tomar&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;100&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;That key doesn\u0027t exist&quot;} 
-Client Started
-Sent: {&quot;type&quot;:&quot;exit&quot;} 
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Received: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Sent: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Received: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;name&quot;,&quot;value&quot;:&quot;Sorabh Tomar&quot;}
+Received: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;name&quot;,&quot;value&quot;:&quot;Sorabh Tomar&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;name&quot;,&quot;value&quot;:&quot;Sorabh&quot;}
+Received: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;name&quot;,&quot;value&quot;:&quot;Sorabh&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Received: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;,&quot;value&quot;:&quot;Sorabh&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;,&quot;value&quot;:&quot;Sorabh&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;name&quot;}
+Received: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;name&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;name&quot;}
+Received: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;name&quot;}
+Sent: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Received: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Received: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Sent: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Received: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;text&quot;,&quot;value&quot;:&quot;Hyperskill is the best!&quot;}
+Received: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;text&quot;,&quot;value&quot;:&quot;Hyperskill is the best!&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;text&quot;}
+Received: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;text&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;,&quot;value&quot;:&quot;Hyperskill is the best!&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;,&quot;value&quot;:&quot;Hyperskill is the best!&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;56&quot;}
+Received: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;56&quot;}
+Sent: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Received: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;56&quot;}
+Received: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;56&quot;}
+Sent: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Received: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;100&quot;}
+Received: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;100&quot;}
+Sent: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Received: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;That key doesn\u0027t exist&quot;}
+Received: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;That key doesn\u0027t exist&quot;}
+Sent: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Received: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Client started!
+Sent: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;name&quot;,&quot;value&quot;:&quot;Sorabh&quot;}
+Received: {&quot;type&quot;:&quot;set&quot;,&quot;key&quot;:&quot;name&quot;,&quot;value&quot;:&quot;Sorabh&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;}
+Client started!
+Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Received: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;,&quot;value&quot;:&quot;Sorabh&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;,&quot;value&quot;:&quot;Sorabh&quot;}
+Client started!
+Sent: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;name&quot;}
+Received: {&quot;type&quot;:&quot;delete&quot;,&quot;key&quot;:&quot;name&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;}
+Client started!
+Sent: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Received: {&quot;type&quot;:&quot;get&quot;,&quot;key&quot;:&quot;name&quot;}
+Sent: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Received: {&quot;response&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;No such key&quot;}
+Client started!
+null input file
+Sent: {&quot;type&quot;:&quot;exit&quot;}
+Received: {&quot;type&quot;:&quot;exit&quot;}
+Sent: {&quot;response&quot;:&quot;OK&quot;}
+Received: {&quot;response&quot;:&quot;OK&quot;}
 </pre>
 </span>
 </div>
@@ -138,7 +216,7 @@ Sent: {&quot;type&quot;:&quot;exit&quot;}
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.3.3</a> at Oct 29, 2024, 9:42:15 AM</p>
+<a href="http://www.gradle.org">Gradle 7.3.3</a> at Oct 29, 2024, 11:01:49 AM</p>
 </div>
 </div>
 </body>

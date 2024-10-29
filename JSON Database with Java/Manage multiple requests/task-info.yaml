@@ -1,11 +1,5 @@
 type: edu
 files:
-  - name: src/client/Main.java
-    visible: true
-    learner_created: false
-  - name: src/server/Main.java
-    visible: true
-    learner_created: false
   - name: test/JsonDatabaseTest.java
     visible: false
     learner_created: false
@@ -15,6 +9,75 @@ files:
   - name: test/JsonRequestBuilder.java
     visible: false
     learner_created: false
+  - name: src/client/data/testGet.json
+    visible: true
+    learner_created: true
+  - name: src/client/data/testSet.json
+    visible: true
+    learner_created: true
+  - name: src/client/data/testDelete.json
+    visible: true
+    learner_created: true
+  - name: src/server/cli/commands/Command.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/commands/GetCommand.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/commands/SetCommand.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/commands/DeleteCommand.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/requests/Request.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/requests/Response.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/CommandExecutor.java
+    visible: true
+    learner_created: true
+  - name: src/client/data/db.json
+    visible: true
+    learner_created: true
+  - name: src/server/database/Database.java
+    visible: true
+    learner_created: true
+  - name: src/server/exceptions/NoSuchKeyException.java
+    visible: true
+    learner_created: true
+  - name: src/server/exceptions/FileIsEmptyException.java
+    visible: true
+    learner_created: true
+  - name: src/server/exceptions/NoSuchRequestException.java
+    visible: true
+    learner_created: true
+  - name: src/server/exceptions/FileIsNotFoundException.java
+    visible: true
+    learner_created: true
+  - name: src/client/CommandLineArgs.java
+    visible: true
+    learner_created: true
+  - name: src/client/Main.java
+    visible: true
+    learner_created: true
+  - name: src/server/Database.java
+    visible: true
+    learner_created: true
+  - name: src/server/Main.java
+    visible: true
+    learner_created: true
+  - name: src/resources/checkstyle.xml
+    visible: true
+    learner_created: true
+  - name: src/server/data/db.json
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5494#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Tue, 29 Oct 2024 17:01:49 UTC"
+record: 5

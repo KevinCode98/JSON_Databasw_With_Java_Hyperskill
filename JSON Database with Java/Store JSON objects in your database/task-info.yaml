@@ -1,9 +1,15 @@
 type: edu
 files:
-  - name: src/client/Main.java
+  - name: src/client/Client.java
     visible: true
     learner_created: false
-  - name: src/server/Main.java
+  - name: src/server/Request.java
+    visible: true
+    learner_created: false
+  - name: src/server/Response.java
+    visible: true
+    learner_created: false
+  - name: src/server/Server.java
     visible: true
     learner_created: false
   - name: test/JsonDatabaseTest.java

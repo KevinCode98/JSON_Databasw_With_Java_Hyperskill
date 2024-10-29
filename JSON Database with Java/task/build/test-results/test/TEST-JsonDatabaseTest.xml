@@ -1,47 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JsonDatabaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-29T15:42:12" hostname="C13380" time="2.606">
+<testsuite name="JsonDatabaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-29T17:01:47" hostname="C13380" time="2.731">
   <properties/>
-  <testcase name="start" classname="JsonDatabaseTest" time="2.606"/>
+  <testcase name="start" classname="JsonDatabaseTest" time="2.731"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 Server started!
-Client Started
-Sent: {"type":"exit"} 
+Client started!
+null input file
+Sent: {"type":"exit"}
+Received: {"type":"exit"}
+Sent: {"response":"OK"}
+Received: {"response":"OK"}
 ?[1;31m
 Start test 2?[0m
+?[1;31m
+Start test 3?[0m
 Server started!
-Client Started
-Sent: {"type":"get","key":"1"} 
-Client Started
-Sent: {"type":"set","key":"1","value":"Hello world!"} 
-Client Started
-Sent: {"type":"set","key":"1","value":"HelloWorld!"} 
-Client Started
-Sent: {"type":"get","key":"1"} 
-Client Started
-Sent: {"type":"delete","key":"1"} 
-Client Started
-Sent: {"type":"delete","key":"1"} 
-Client Started
-Sent: {"type":"get","key":"1"} 
-Client Started
-Sent: {"type":"set","key":"text","value":"Hyperskill is the best!"} 
-Client Started
-Sent: {"type":"get","key":"text"} 
-Client Started
-Sent: {"type":"get","key":"name"} 
-Client Started
-Sent: {"type":"delete","key":"name"} 
-Client Started
-Sent: {"type":"set","key":"name","value":"Sorabh Tomar"} 
-Client Started
-Sent: {"type":"get","key":"name"} 
-Client Started
-Sent: {"type":"delete","key":"100"} 
-Client Started
-Sent: {"type":"delete","key":"That key doesn\u0027t exist"} 
-Client Started
-Sent: {"type":"exit"} 
+Client started!
+null input file
+Sent: {"type":"get","key":"name"}
+Received: {"type":"get","key":"name"}
+Sent: {"response":"ERROR","reason":"No such key"}
+Received: {"response":"ERROR","reason":"No such key"}
+Client started!
+null input file
+Sent: {"type":"set","key":"name","value":"Sorabh Tomar"}
+Received: {"type":"set","key":"name","value":"Sorabh Tomar"}
+Sent: {"response":"OK"}
+Received: {"response":"OK"}
+Client started!
+null input file
+Sent: {"type":"set","key":"name","value":"Sorabh"}
+Received: {"type":"set","key":"name","value":"Sorabh"}
+Sent: {"response":"OK"}
+Received: {"response":"OK"}
+Client started!
+null input file
+Sent: {"type":"get","key":"name"}
+Received: {"type":"get","key":"name"}
+Sent: {"response":"OK","value":"Sorabh"}
+Received: {"response":"OK","value":"Sorabh"}
+Client started!
+null input file
+Sent: {"type":"delete","key":"name"}
+Received: {"type":"delete","key":"name"}
+Sent: {"response":"OK"}
+Received: {"response":"OK"}
+Client started!
+null input file
+Sent: {"type":"delete","key":"name"}
+Received: {"type":"delete","key":"name"}
+Sent: {"response":"ERROR","reason":"No such key"}
+Received: {"response":"ERROR","reason":"No such key"}
+Client started!
+null input file
+Sent: {"type":"get","key":"name"}
+Received: {"type":"get","key":"name"}
+Sent: {"response":"ERROR","reason":"No such key"}
+Received: {"response":"ERROR","reason":"No such key"}
+Client started!
+null input file
+Sent: {"type":"set","key":"text","value":"Hyperskill is the best!"}
+Received: {"type":"set","key":"text","value":"Hyperskill is the best!"}
+Sent: {"response":"OK"}
+Received: {"response":"OK"}
+Client started!
+null input file
+Sent: {"type":"get","key":"text"}
+Received: {"type":"get","key":"text"}
+Sent: {"response":"OK","value":"Hyperskill is the best!"}
+Received: {"response":"OK","value":"Hyperskill is the best!"}
+Client started!
+null input file
+Sent: {"type":"get","key":"56"}
+Received: {"type":"get","key":"56"}
+Sent: {"response":"ERROR","reason":"No such key"}
+Received: {"response":"ERROR","reason":"No such key"}
+Client started!
+null input file
+Sent: {"type":"delete","key":"56"}
+Received: {"type":"delete","key":"56"}
+Sent: {"response":"ERROR","reason":"No such key"}
+Received: {"response":"ERROR","reason":"No such key"}
+Client started!
+null input file
+Sent: {"type":"delete","key":"100"}
+Received: {"type":"delete","key":"100"}
+Sent: {"response":"ERROR","reason":"No such key"}
+Received: {"response":"ERROR","reason":"No such key"}
+Client started!
+null input file
+Sent: {"type":"delete","key":"That key doesn\u0027t exist"}
+Received: {"type":"delete","key":"That key doesn\u0027t exist"}
+Sent: {"response":"ERROR","reason":"No such key"}
+Received: {"response":"ERROR","reason":"No such key"}
+Client started!
+Sent: {"type":"set","key":"name","value":"Sorabh"}
+Received: {"type":"set","key":"name","value":"Sorabh"}
+Sent: {"response":"OK"}
+Received: {"response":"OK"}
+Client started!
+Sent: {"type":"get","key":"name"}
+Received: {"type":"get","key":"name"}
+Sent: {"response":"OK","value":"Sorabh"}
+Received: {"response":"OK","value":"Sorabh"}
+Client started!
+Sent: {"type":"delete","key":"name"}
+Received: {"type":"delete","key":"name"}
+Sent: {"response":"OK"}
+Received: {"response":"OK"}
+Client started!
+Sent: {"type":"get","key":"name"}
+Received: {"type":"get","key":"name"}
+Sent: {"response":"ERROR","reason":"No such key"}
+Received: {"response":"ERROR","reason":"No such key"}
+Client started!
+null input file
+Sent: {"type":"exit"}
+Received: {"type":"exit"}
+Sent: {"response":"OK"}
+Received: {"response":"OK"}
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

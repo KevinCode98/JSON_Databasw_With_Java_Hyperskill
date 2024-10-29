@@ -1,41 +1,43 @@
 package client;
 
 import com.beust.jcommander.JCommander;
-import server.cli.requests.Request;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+
+/**
+ * This class implements java Client server.
+ * */
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        String address = "127.0.0.1";
+        int port = 1024;
+        Socket socket = new Socket(InetAddress.getByName(address), port);
+        System.out.println("Client started!");
 
-    private static final String ADDRESS = "127.0.0.1";
-    private static final int PORT = 8000;
+        DataInputStream in = new DataInputStream(socket.getInputStream());
+        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
-    public static void main(String[] args) {
-
-        System.out.println("Client Started");
-
-        Request request = new Request();
-
+        CommandLineArgs commandLineArgs = new CommandLineArgs();
         JCommander.newBuilder()
-                .addObject(request)
+                .addObject(commandLineArgs)
                 .build()
                 .parse(args);
 
-        try (
-                Socket socket = new Socket(InetAddress.getByName(ADDRESS), PORT);
-                DataInputStream input = new DataInputStream(socket.getInputStream());
-                DataOutputStream output = new DataOutputStream(socket.getOutputStream())
-        ) {
-            output.writeUTF(request.toJSON());
-            System.out.printf("Sent: %s \n", request.toJSON());
-            System.out.print("Received: " + input.readUTF());
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        String command = commandLineArgs.buildCommand();
+        System.out.println("Sent: " + command);
+        out.writeUTF(command);
+
+        String response = in.readUTF();
+        System.out.println("Received: " + response);
+
+        in.close();
+        out.close();
+        socket.close();
     }
 }
+
