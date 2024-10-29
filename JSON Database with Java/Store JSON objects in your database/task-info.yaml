@@ -1,17 +1,5 @@
 type: edu
 files:
-  - name: src/client/Client.java
-    visible: true
-    learner_created: false
-  - name: src/server/Request.java
-    visible: true
-    learner_created: false
-  - name: src/server/Response.java
-    visible: true
-    learner_created: false
-  - name: src/server/Server.java
-    visible: true
-    learner_created: false
   - name: test/JsonDatabaseTest.java
     visible: false
     learner_created: false
@@ -21,6 +9,31 @@ files:
   - name: test/JsonRequestBuilder.java
     visible: false
     learner_created: false
+  - name: src/client/data/db.json
+    visible: true
+    learner_created: true
+  - name: src/server/Database.java
+    visible: true
+    learner_created: true
+  - name: src/client/CommandLineArgs.java
+    visible: true
+    learner_created: true
+  - name: src/client/Main.java
+    visible: true
+    learner_created: true
+  - name: src/server/Main.java
+    visible: true
+    learner_created: true
+  - name: src/server/data/db.json
+    visible: true
+    learner_created: true
+  - name: src/resources/checkstyle.xml
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5495#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">Hyperskill</a>
+    to continue learning.
+  time: "Tue, 29 Oct 2024 17:02:43 UTC"
 record: -1

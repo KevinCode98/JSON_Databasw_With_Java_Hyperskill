@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 class JsonBuilder {
@@ -14,6 +15,11 @@ class JsonBuilder {
 
     public JsonBuilder addValue(String key, String value) {
         jsonObject.addProperty(key, value);
+        return this;
+    }
+
+    public JsonBuilder addValue(String key, JsonElement value) {
+        jsonObject.add(key, value);
         return this;
     }
 
