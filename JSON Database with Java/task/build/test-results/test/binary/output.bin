@@ -1,87 +1,40 @@
 [1;31m
 Start test 1[0m
 Server started!
-Client started!
-Sent: exit
-Received: exit
+Client Started
+Sent: {"type":"exit"} 
 [1;31m
 Start test 2[0m
 Server started!
-Client started!
-Sent: get 1
-Received: get 1
-Sent: ERROR
-Received: ERROR
-Client started!
-Sent: set 1 Hello world!
-Received: set 1 Hello world!
-	Sent: OK
-Received: OK
-Client started!
-Sent: set 1 HelloWorld!
-Received: set 1 HelloWorld!
-	Sent: OK
-Received: OK
-Client started!
-Sent: get 1
-Received: get 1
-Sent: HelloWorld!
-Received: HelloWorld!
-Client started!
-Sent: delete 1
-Received: delete 1
-	Sent: OK
-Received: OK
-Client started!
-Sent: delete 1
-Received: delete 1
-	Sent: OK
-Received: OK
-Client started!
-Sent: get 1
-Received: get 1
-Sent: ERROR
-Received: ERROR
-Client started!
-%Sent: set 55 Hyperskill is the best!
-)Received: set 55 Hyperskill is the best!
-	Sent: OK
-Received: OK
-Client started!
-Sent: get 55
-Received: get 55
-Sent: Hyperskill is the best!
-"Received: Hyperskill is the best!
-Client started!
-Sent: get 56
-Received: get 56
-Sent: ERROR
-Received: ERROR
-Client started!
-Sent: delete 55
-Received: delete 55
-	Sent: OK
-Received: OK
-Client started!
-Sent: delete 56
-Received: delete 56
-	Sent: OK
-Received: OK
-Client started!
-Sent: delete 100
-Received: delete 100
-	Sent: OK
-Received: OK
-Client started!
-Sent: delete 0
-Received: delete 0
-Sent: ERROR
-Received: ERROR
-Client started!
-Sent: delete 1001
-Received: delete 1001
-Sent: ERROR
-Received: ERROR
-Client started!
-Sent: exit
-Received: exit
+Client Started
+ Sent: {"type":"get","key":"1"} 
+Client Started
+7Sent: {"type":"set","key":"1","value":"Hello world!"} 
+Client Started
+6Sent: {"type":"set","key":"1","value":"HelloWorld!"} 
+Client Started
+ Sent: {"type":"get","key":"1"} 
+Client Started
+#Sent: {"type":"delete","key":"1"} 
+Client Started
+#Sent: {"type":"delete","key":"1"} 
+Client Started
+ Sent: {"type":"get","key":"1"} 
+Client Started
+ESent: {"type":"set","key":"text","value":"Hyperskill is the best!"} 
+Client Started
+#Sent: {"type":"get","key":"text"} 
+Client Started
+#Sent: {"type":"get","key":"name"} 
+Client Started
+&Sent: {"type":"delete","key":"name"} 
+Client Started
+:Sent: {"type":"set","key":"name","value":"Sorabh Tomar"} 
+Client Started
+#Sent: {"type":"get","key":"name"} 
+Client Started
+%Sent: {"type":"delete","key":"100"} 
+Client Started
+=Sent: {"type":"delete","key":"That key doesn\u0027t exist"} 
+Client Started
+Sent: {"type":"exit"} 

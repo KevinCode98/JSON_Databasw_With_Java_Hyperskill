@@ -1,17 +1,56 @@
 type: edu
 files:
-  - name: src/client/Main.java
-    visible: true
-    learner_created: false
-  - name: src/server/Main.java
-    visible: true
-    learner_created: false
   - name: test/JsonDatabaseTest.java
     visible: false
     learner_created: false
   - name: test/JsonFinder.java
     visible: false
     learner_created: false
-feedback_link: https://hyperskill.org/projects/65/stages/351/implement#comment
-status: Unchecked
-record: -1
+  - name: src/server/JsonDatabase.java
+    visible: true
+    learner_created: true
+  - name: src/server/ResponseObject.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/commands/Command.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/commands/GetCommand.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/commands/SetCommand.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/commands/DeleteCommand.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/requests/Request.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/requests/Response.java
+    visible: true
+    learner_created: true
+  - name: src/server/cli/CommandExecutor.java
+    visible: true
+    learner_created: true
+  - name: src/server/database/Database.java
+    visible: true
+    learner_created: true
+  - name: src/server/exceptions/NoSuchKeyException.java
+    visible: true
+    learner_created: true
+  - name: src/server/exceptions/NoSuchRequestException.java
+    visible: true
+    learner_created: true
+  - name: src/server/Main.java
+    visible: true
+    learner_created: true
+  - name: src/client/Main.java
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/5493#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Tue, 29 Oct 2024 15:42:15 UTC"
+record: 4

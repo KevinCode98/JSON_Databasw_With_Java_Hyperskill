@@ -3,17 +3,14 @@ import org.hyperskill.hstest.stage.StageTest;
 import org.hyperskill.hstest.testcase.CheckResult;
 import org.hyperskill.hstest.testing.TestedProgram;
 
+import static org.hyperskill.hstest.testing.expect.Expectation.expect;
+import static org.hyperskill.hstest.testing.expect.json.JsonChecker.isObject;
+
 public class JsonDatabaseTest extends StageTest<String> {
     private static final String OK_STATUS = "OK";
     private static final String ERROR_STATUS = "ERROR";
-
+    private static final String NO_SUCH_KEY_REASON = "No such key";
     private static final String WRONG_EXIT = "The server should stop when client sends 'exit' request";
-    private static final String WRONG_GET_EMPTY_CELL_WITH_ERROR = "When a client tries to get an empty cell from the server, the server should send '" + ERROR_STATUS + "' as response and the client should print that response";
-    private static final String WRONG_SET_VALUE_TO_CELL_WITH_OK = "When a client tries to save a value on the server, the server should save the value and send '" + OK_STATUS + "' as response. The client should print that response";
-    private static final String WRONG_GET_VALUE = "When a client tries to get the value in a non-empty cell from the server, the server should send the value in that non-empty cell as response. And the client should print that received value.\nMaybe the problem is in processing 'set' action: If the specified cell already contains information, you should simply overwrite it with new value.";
-    private static final String WRONG_DELETE = "When a client tries to delete a value from the specified cell on the server, the server should assign an empty string to this cell and send '" + OK_STATUS + "' as response.";
-    private static final String WRONG_DELETE_EMPTY = "When a client tries to delete a cell with empty value from the server, the server should assign an empty string to that cell and send '" + OK_STATUS + "' as response.";
-    private static final String WRONG_DELETE_INDEX_OUT_OF_BOUNDS = "When a user tries to delete a cell whose index is out of bounds (less than 0 or greater than 1000), the server should send '" + ERROR_STATUS + "' as response.";
 
     @DynamicTest(order = 1)
     CheckResult checkExit() {
@@ -57,98 +54,289 @@ public class JsonDatabaseTest extends StageTest<String> {
         String expectedValue;
 
         client = getClient();
-        output = client.start("-t", "get", "-i", "1");
-        if (!output.toUpperCase().contains(ERROR_STATUS)) {
-            return CheckResult.wrong(WRONG_GET_EMPTY_CELL_WITH_ERROR);
-        }
+        output = client.start("-t", "get", "-k", "1");
+
+        String requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "get")
+                .value("key", "1")
+            );
+        String responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", ERROR_STATUS)
+                .value("reason", NO_SUCH_KEY_REASON)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "set", "-i", "1", "-m", "Hello world!");
-        if (!output.toUpperCase().contains(OK_STATUS)) {
-            return CheckResult.wrong(WRONG_SET_VALUE_TO_CELL_WITH_OK);
-        }
+        output = client.start("-t", "set", "-k", "1", "-v", "Hello world!");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "set")
+                .value("key", "1")
+                .value("value", "Hello world!")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", OK_STATUS)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "set", "-i", "1", "-m", "HelloWorld!");
-        if (!output.toUpperCase().contains(OK_STATUS)) {
-            return CheckResult.wrong(WRONG_SET_VALUE_TO_CELL_WITH_OK);
-        }
+        output = client.start("-t", "set", "-k", "1", "-v", "HelloWorld!");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "set")
+                .value("key", "1")
+                .value("value", "HelloWorld!")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", OK_STATUS)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "get", "-i", "1");
+        output = client.start("-t", "get", "-k", "1");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "get")
+                .value("key", "1")
+            );
         expectedValue = "HelloWorld!";
-        if (!output.contains(expectedValue)) {
-            return CheckResult.wrong(WRONG_GET_VALUE +
-                    "\nExpected:\n" + expectedValue + "\n\nYour output:\n" + output);
-        }
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", OK_STATUS)
+                .value("value", expectedValue)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "delete", "-i", "1");
-        if (!output.toUpperCase().contains(OK_STATUS)) {
-            return CheckResult.wrong(WRONG_DELETE);
-        }
+        output = client.start("-t", "delete", "-k", "1");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "delete")
+                .value("key", "1")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", OK_STATUS)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "delete", "-i", "1");
-        if (!output.toUpperCase().contains(OK_STATUS)) {
-            return CheckResult.wrong(WRONG_DELETE_EMPTY);
-        }
+        output = client.start("-t", "delete", "-k", "1");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "delete")
+                .value("key", "1")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", ERROR_STATUS)
+                .value("reason", NO_SUCH_KEY_REASON)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "get", "-i", "1");
-        if (!output.toUpperCase().contains(ERROR_STATUS)) {
-            return CheckResult.wrong(WRONG_GET_EMPTY_CELL_WITH_ERROR + "\nMaybe after deleting the value from the specified cell on the server, you didn't assign an empty string to it.");
-        }
+        output = client.start("-t", "get", "-k", "1");
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "get")
+                .value("key", "1")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", ERROR_STATUS)
+                .value("reason", NO_SUCH_KEY_REASON)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "set", "-i", "55", "-m", "Hyperskill is the best!");
-        if (!output.toUpperCase().contains(OK_STATUS)) {
-            return CheckResult.wrong(WRONG_SET_VALUE_TO_CELL_WITH_OK);
-        }
+        output = client.start("-t", "set", "-k", "text", "-v", "Hyperskill is the best!");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "set")
+                .value("key", "text")
+                .value("value", "Hyperskill is the best!")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", OK_STATUS)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "get", "-i", "55");
+        output = client.start("-t", "get", "-k", "text");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "get")
+                .value("key", "text")
+            );
         expectedValue = "Hyperskill is the best!";
-        if (!output.contains(expectedValue)) {
-            return CheckResult.wrong(WRONG_GET_VALUE +
-                    "\nExpected:\n" + expectedValue + "\nYour output:\n" + output);
-        }
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", OK_STATUS)
+                .value("value", expectedValue)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "get", "-i", "56");
-        if (!output.toUpperCase().contains(ERROR_STATUS)) {
-            return CheckResult.wrong(WRONG_GET_EMPTY_CELL_WITH_ERROR);
-        }
+        output = client.start("-t", "get", "-k", "name");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "get")
+                .value("key", "name")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", ERROR_STATUS)
+                .value("reason", NO_SUCH_KEY_REASON)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "delete", "-i", "55");
-        if (!output.toUpperCase().contains(OK_STATUS)) {
-            return CheckResult.wrong(WRONG_DELETE);
-        }
+        output = client.start("-t", "delete", "-k", "name");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "delete")
+                .value("key", "name")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", ERROR_STATUS)
+                .value("reason", NO_SUCH_KEY_REASON)
+            );
+
 
         client = getClient();
-        output = client.start("-t", "delete", "-i", "56");
-        if (!output.toUpperCase().contains(OK_STATUS)) {
-            return CheckResult.wrong(WRONG_DELETE_EMPTY);
-        }
+        output = client.start("-t", "set", "-k", "name", "-v", "Sorabh Tomar");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+                .asJson()
+                .check(isObject()
+                        .value("type", "set")
+                        .value("key", "name")
+                        .value("value", "Sorabh Tomar")
+                );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+                .asJson()
+                .check(isObject()
+                        .value("response", OK_STATUS)
+                );
+
 
         client = getClient();
-        output = client.start("-t", "delete", "-i", "100");
-        if (!output.toUpperCase().contains(OK_STATUS)) {
-            return CheckResult.wrong(WRONG_DELETE_EMPTY);
-        }
+        output = client.start("-t", "get", "-k", "name");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+                .asJson()
+                .check(isObject()
+                        .value("type", "get")
+                        .value("key", "name")
+                );
+        expectedValue = "Sorabh Tomar";
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+                .asJson()
+                .check(isObject()
+                        .value("response", OK_STATUS)
+                        .value("value", expectedValue)
+                );
+
 
         client = getClient();
-        output = client.start("-t", "delete", "-i", "0");
-        if (!output.toUpperCase().contains(ERROR_STATUS)) {
-            return CheckResult.wrong(WRONG_DELETE_INDEX_OUT_OF_BOUNDS);
-        }
+        output = client.start("-t", "delete", "-k", "100");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "delete")
+                .value("key", "100")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", ERROR_STATUS)
+                .value("reason", NO_SUCH_KEY_REASON)
+            );
 
         client = getClient();
-        output = client.start("-t", "delete", "-i", "1001");
-        if (!output.toUpperCase().contains(ERROR_STATUS)) {
-            return CheckResult.wrong(WRONG_DELETE_INDEX_OUT_OF_BOUNDS);
-        }
+        output = client.start("-t", "delete", "-k", "That key doesn't exist");
+
+        requestJson = JsonFinder.findRequestJsonObject(output);
+        expect(requestJson)
+            .asJson()
+            .check(isObject()
+                .value("type", "delete")
+                .value("key", "That key doesn't exist")
+            );
+        responseJson = JsonFinder.findResponseJsonObject(output);
+        expect(responseJson)
+            .asJson()
+            .check(isObject()
+                .value("response", ERROR_STATUS)
+                .value("reason", NO_SUCH_KEY_REASON)
+            );
+
 
         stopServer();
 
